@@ -1,10 +1,29 @@
-//Creating a map with mapbox.js and TurfJS
-//Aim of the project is to mess around with TurfJS 
-//The prompt was taken from http://lyzidiamond.com/turf-exercise/
-//I elected to do #3: For any state: Create a map showing only the counties that have more than 100,000 residents.
-//Naturally, I chose my home state of Georgia. It has the second-most number of counties in the U.S., after Texas.
-    L.mapbox.accessToken = 'pk.eyJ1IjoidG9sb21hcHMiLCJhIjoiREpQUkpiTSJ9.g4b1dVMvmEB78zMOSgiHIA';
-    var map = L.mapbox.map('basemap', 'tolomaps.l7c39gjh');
-    var countiesLayer = L.mapbox.featureLayer()
-        .loadURL('/data/major_dataset_imports_waste_receiver_locations.geojson')
-        .addTo(map);
+
+L.mapbox.accessToken = 'pk.eyJ1IjoidG9sb21hcHMiLCJhIjoiREpQUkpiTSJ9.g4b1dVMvmEB78zMOSgiHIA';
+var map = L.mapbox.map('basemap', 'tolomaps.l7c39gjh');
+var ohioImporters = L.mapbox.featureLayer()
+    .loadURL('/data/OH_imports_reciever_geojson.geojson');
+
+    map.on('ready', function() {
+        console.log(ohioImporters);
+//        console.log(ohioImporters.getGeoJSON().features);
+//        var features = map.ohioImporters.getGeoJSON().features;
+        
+//        L.geoJson(ohioImporters, {
+//            style: function(feature) {
+//                switch ()
+//            }
+//        }).addTo(map);
+        
+        var icons = L.marker([39.9833, -82.9833], {
+                icon: L.divIcon({
+                // Specify a class name we can refer to in CSS.
+                className: 'icon',
+                // Define what HTML goes in each marker.
+                html: "HI",
+                // Set a markers width and height.
+                iconSize: [40, 40]
+            })
+        }).addTo(map);
+    });
+
